@@ -3,12 +3,12 @@ import BuilderControls from '../../components/Burger/BuilderControls/BuilderCont
 import Burger from '../../components/Burger/Burger';
 import Auxx from '../../hoc/Auxx';
 
-const INGREDIENS_PRICE = {
-    salad: .5,
-    bacon: .6,
-    cheese: .4,
-    meat: .7,
-}
+const INGREDIENT_PRICES = {
+    salad: 0.5,
+    cheese: 0.4,
+    meat: 1.3,
+    bacon: 0.7
+};
 
 class BurgerBuilder extends Component {
     state = {
@@ -19,21 +19,18 @@ class BurgerBuilder extends Component {
             meat: 0
         },
         totalPrice: 4,
-        purchasable: false,
-        purchasing: false
     }
 
 
     addIngredienthandler = (type) => {
-        
+
         const oldCount = this.state.ingredients[type]
-        
         // console.log(oldCount)
         const updateCount = oldCount + 1;
-        const updatedIngredients = {...this.state.ingrediens}
+        const updatedIngredients = { ...this.state.ingredients}
         updatedIngredients[type] = updateCount;
 
-        const priceAddition = INGREDIENS_PRICE[type];
+        const priceAddition = INGREDIENT_PRICES[type];
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice + priceAddition;
         this.setState({ totalPrice: newPrice, ingredients: updatedIngredients })
